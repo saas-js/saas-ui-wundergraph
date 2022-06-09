@@ -1,0 +1,12 @@
+{
+  "name": "saas-ui-wundergraph",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:saas-js/saas-ui-wundergraph.git",
+  "author": "Eelco Wiersma <contact@pagebakers.nl>",
+  "license": "MIT",
+  "packageManager": "yarn@3.2.1",
+  "workspaces": [
+    "packages/*"
+  ]
+}

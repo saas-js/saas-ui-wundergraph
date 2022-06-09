@@ -1,0 +1,8 @@
+{
+  "name": "@saas-ui/wundergraph-forms",
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "@wundergraph/sdk": "^0.91.5",
+    "handlebars": "^4.7.7"
+  }
+}
