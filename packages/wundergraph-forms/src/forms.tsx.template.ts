@@ -8,7 +8,8 @@ import jsonSchema from "./jsonschema";
 import { AutoForm, FormProps } from "@saas-ui/react";
 import { jsonSchemaForm } from "@saas-ui/forms/ajv";
 
-export interface WunderFormProps<I, T> extends Omit<FormProps<I>, 'onSubmit'> {
+export interface WunderFormProps<I, T> extends Omit<FormProps<I>, 'onSubmit' | 'defaultValues> {
+    defaultValues: I
     onResult?: (result: QueryResult<T>) => void
 }
 export interface WunderMutationFormProps<I, T> extends WunderFormProps<I, T> {
@@ -31,6 +32,7 @@ export const {{name}}Form: React.FC<WunderMutationFormProps<{{inputType}}, {{res
     )
 }
 {{/each}}
+
 {{#each queries}}
 export const {{name}}Form: React.FC<WunderFormProps<{{inputType}}, {{responseType}}Data>> = (props) => {
     const {onResult, defaultValues, ...formProps} = props
@@ -45,6 +47,46 @@ export const {{name}}Form: React.FC<WunderFormProps<{{inputType}}, {{responseTyp
             defaultValues={defaultValues}
             onSubmit={async (data) => {
                 await refetch({input: data})
+            }}/>
+    )
+}
+{{/each}}
+
+{{#each liveQueries}}
+export const {{name}}LiveForm: React.FC<WunderFormProps<{{inputType}}, {{responseType}}Data>> = (props) => {
+    const {onResult, defaultValues, ...formProps} = props
+    const [formData, setFormData] = useState<{{inputType}}>(defaultValues);
+    const {result} = useLiveQuery.{{name}}({input: formData});
+    useEffect(()=>{
+        onResult?.(result);
+    },[result]);
+    return (
+        <AutoForm<{{inputType}}>
+            {...jsonSchemaForm(jsonSchema.{{name}}.input)}
+            {...formProps}
+            defaultValues={defaultValues}
+            onSubmit={async (data) => {
+                setFormData(data)
+            }}/>
+    )
+}
+{{/each}}
+
+{{#each subscriptions}}
+export const {{name}}SubscriptionForm: React.FC<WunderFormProps<{{inputType}}, {{responseType}}Data>> = (props) => {
+    const {onResult, defaultValues, ...formProps} = props
+    const [formData,setFormData] = useState<{{inputType}}>(defaultValues);
+    const {result} = useSubscription.{{name}}({input: formData});
+    useEffect(()=>{
+        onResult?.(result);
+    },[result]);
+    return (
+        <AutoForm<{{inputType}}>
+            {...jsonSchemaForm(jsonSchema.{{name}}.input)}
+            {...formProps}
+            defaultValues={defaultValues}
+            onSubmit={async (data) => {
+                setFormData(data)
             }}/>
     )
 }
