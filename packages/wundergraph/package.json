@@ -1,5 +1,5 @@
 {
-  "name": "@saas-ui/wundergraph-forms",
+  "name": "@saas-ui/wundergraph",
   "packageManager": "yarn@3.2.1",
   "dependencies": {
     "@chakra-ui/react": "^2.2.1",
