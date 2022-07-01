@@ -2,7 +2,15 @@
   "name": "@saas-ui/wundergraph-forms",
   "packageManager": "yarn@3.2.1",
   "dependencies": {
+    "@chakra-ui/react": "^2.2.1",
     "@wundergraph/sdk": "^0.91.5",
+    "@saas-ui/react": "^1.0.0",
+    "@saas-ui/pro": "^0.5.0",
     "handlebars": "^4.7.7"
+  },
+  "peerDependencies": {
+    "@emotion/react": ">=11",
+    "@emotion/styled": ">=11",
+    "framer-motion": ">6"
   }
 }
